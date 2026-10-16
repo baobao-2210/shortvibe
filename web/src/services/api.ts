@@ -13,8 +13,17 @@ export const api = axios.create({
 // Helper to resolve media URLs (thumbnails, videos, avatars)
 export const resolveMediaUrl = (url?: string): string => {
   if (!url) return '';
-  // If video or media was stored with Android emulator IP 10.0.2.2:3000, resolve to localhost:3000
-  if (url.includes('10.0.2.2:3000')) {
+  if (url.startsWith('/uploads')) {
+    return API_BASE_URL.startsWith('http') ? `${API_BASE_URL}${url}` : url;
+  }
+  if (API_BASE_URL.startsWith('http')) {
+    if (url.includes('10.0.2.2:3000')) {
+      return url.replace('http://10.0.2.2:3000', API_BASE_URL);
+    }
+    if (url.includes('localhost:3000')) {
+      return url.replace('http://localhost:3000', API_BASE_URL);
+    }
+  } else if (url.includes('10.0.2.2:3000')) {
     return url.replace('10.0.2.2:3000', 'localhost:3000');
   }
   return url;
