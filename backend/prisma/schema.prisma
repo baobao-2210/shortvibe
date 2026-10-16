@@ -1,0 +1,147 @@
+// Prisma schema for ShortVibe Short Video Platform
+// Datasource: PostgreSQL
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum VideoVisibility {
+  PUBLIC
+  PRIVATE
+
+  @@map("video_visibility")
+}
+
+model User {
+  id           String    @id @default(uuid()) @db.Uuid
+  username     String    @unique @db.VarChar(50)
+  email        String    @unique @db.VarChar(255)
+  passwordHash String    @map("password_hash") @db.VarChar(255)
+  displayName  String?   @map("display_name") @db.VarChar(100)
+  avatarUrl    String?   @map("avatar_url") @db.VarChar(500)
+  bio          String?   @db.Text
+  createdAt    DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  // Relations
+  videos                Video[]
+  likes                 Like[]
+  comments              Comment[]
+  following             Follow[]         @relation("UserFollowing")
+  followers             Follow[]         @relation("UserFollowers")
+  receivedNotifications Notification[] @relation("UserReceivedNotifications")
+  sentNotifications     Notification[] @relation("UserSentNotifications")
+
+  @@map("users")
+}
+
+model Video {
+  id              String          @id @default(uuid()) @db.Uuid
+  userId          String          @map("user_id") @db.Uuid
+  caption         String?         @db.Text
+  videoUrl        String          @map("video_url") @db.VarChar(1000)
+  thumbnailUrl    String?         @map("thumbnail_url") @db.VarChar(1000)
+  durationSeconds Int?            @map("duration_seconds")
+  visibility      VideoVisibility @default(PUBLIC)
+  viewCount       Int             @default(0) @map("view_count")
+  createdAt       DateTime        @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime        @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  // Relations
+  user            User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  likes           Like[]
+  comments        Comment[]
+  notifications   Notification[]
+
+  @@index([userId])
+  @@index([createdAt(sort: Desc)])
+  @@map("videos")
+}
+
+model Like {
+  userId    String   @map("user_id") @db.Uuid
+  videoId   String   @map("video_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  // Relations
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  video     Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
+
+  @@id([userId, videoId])
+  @@index([videoId])
+  @@map("likes")
+}
+
+model Comment {
+  id              String         @id @default(uuid()) @db.Uuid
+  userId          String         @map("user_id") @db.Uuid
+  videoId         String         @map("video_id") @db.Uuid
+  content         String         @db.Text
+  parentCommentId String?        @map("parent_comment_id") @db.Uuid
+  createdAt       DateTime       @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime       @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  // Relations
+  user            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  video           Video          @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  parentComment   Comment?       @relation("CommentReplies", fields: [parentCommentId], references: [id], onDelete: Cascade)
+  replies         Comment[]      @relation("CommentReplies")
+  notifications   Notification[]
+
+  @@index([videoId])
+  @@index([userId])
+  @@index([parentCommentId])
+  @@map("comments")
+}
+
+model Follow {
+  followerId  String   @map("follower_id") @db.Uuid
+  followingId String   @map("following_id") @db.Uuid
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  // Relations
+  follower    User     @relation("UserFollowing", fields: [followerId], references: [id], onDelete: Cascade)
+  following   User     @relation("UserFollowers", fields: [followingId], references: [id], onDelete: Cascade)
+
+  @@id([followerId, followingId])
+  @@index([followingId])
+  @@index([followerId])
+  @@map("follows")
+}
+
+enum NotificationType {
+  LIKE
+  COMMENT
+  FOLLOW
+  MENTION
+
+  @@map("notification_type")
+}
+
+model Notification {
+  id          String           @id @default(uuid()) @db.Uuid
+  recipientId String           @map("recipient_id") @db.Uuid
+  actorId     String           @map("actor_id") @db.Uuid
+  type        NotificationType
+  videoId     String?          @map("video_id") @db.Uuid
+  commentId   String?          @map("comment_id") @db.Uuid
+  content     String?          @db.Text
+  isRead      Boolean          @default(false) @map("is_read")
+  createdAt   DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  // Relations
+  recipient   User             @relation("UserReceivedNotifications", fields: [recipientId], references: [id], onDelete: Cascade)
+  actor       User             @relation("UserSentNotifications", fields: [actorId], references: [id], onDelete: Cascade)
+  video       Video?           @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  comment     Comment?         @relation(fields: [commentId], references: [id], onDelete: Cascade)
+
+  @@index([recipientId, isRead])
+  @@index([recipientId, createdAt(sort: Desc)])
+  @@index([recipientId, actorId, type, videoId])
+  @@map("notifications")
+}

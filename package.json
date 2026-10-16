@@ -1,0 +1,19 @@
+{
+  "name": "shortvibe-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npm --prefix backend run start",
+    "start:dev": "npm --prefix backend run start:dev",
+    "build": "npm --prefix backend run build",
+    "test": "npm --prefix backend test",
+    "prisma:migrate": "npm --prefix backend run prisma:migrate",
+    "prisma:seed": "npm --prefix backend run prisma:seed",
+    "prisma:studio": "npm --prefix backend run prisma:studio",
+    "mobile:dev": "npm --prefix mobile run dev",
+    "mobile:build": "npm --prefix mobile run build",
+    "mobile:cap:sync": "npm --prefix mobile run cap:sync",
+    "mobile:cap:android": "npm --prefix mobile run cap:android",
+    "mobile:adb:reverse": "& \"$env:LOCALAPPDATA\\Android\\Sdk\\platform-tools\\adb.exe\" -d reverse tcp:3000 tcp:3000"
+  }
+}

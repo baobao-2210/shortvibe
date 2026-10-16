@@ -1,0 +1,104 @@
+{
+  "name": "ShortVibe / TikTok-Style Video App UI",
+  "projectId": "7835354535722154786",
+  "theme": "dark",
+  "colors": {
+    "primary": "#fe2c55",
+    "primaryContainer": "#ff5168",
+    "primaryFixed": "#ffdada",
+    "onPrimary": "#ffffff",
+    "onPrimaryContainer": "#5b0015",
+    "secondary": "#00f2fe",
+    "secondaryContainer": "#00f1fd",
+    "onSecondary": "#00373a",
+    "tertiary": "#deb7ff",
+    "tertiaryContainer": "#b76dfd",
+    "background": "#131316",
+    "onBackground": "#e4e1e6",
+    "surface": "#131316",
+    "surfaceDim": "#131316",
+    "surfaceBright": "#39393c",
+    "surfaceContainerLowest": "#0e0e11",
+    "surfaceContainerLow": "#1b1b1e",
+    "surfaceContainer": "#1f1f22",
+    "surfaceContainerHigh": "#2a2a2d",
+    "surfaceContainerHighest": "#353438",
+    "onSurface": "#e4e1e6",
+    "onSurfaceVariant": "#e6bcbd",
+    "outline": "#ad8889",
+    "outlineVariant": "#5d3f40",
+    "error": "#ffb4ab",
+    "errorContainer": "#93000a",
+    "onError": "#690005"
+  },
+  "typography": {
+    "fonts": {
+      "body": "Inter, sans-serif",
+      "headline": "Inter, sans-serif",
+      "label": "Space Grotesk, sans-serif"
+    },
+    "scale": {
+      "headlineXl": { "fontSize": "40px", "lineHeight": "48px", "fontWeight": "800", "letterSpacing": "-0.03em" },
+      "headlineLg": { "fontSize": "32px", "lineHeight": "40px", "fontWeight": "700", "letterSpacing": "-0.02em" },
+      "headlineMd": { "fontSize": "24px", "lineHeight": "32px", "fontWeight": "700", "letterSpacing": "-0.02em" },
+      "headlineSm": { "fontSize": "20px", "lineHeight": "28px", "fontWeight": "600", "letterSpacing": "-0.01em" },
+      "titleMd": { "fontSize": "16px", "lineHeight": "24px", "fontWeight": "600", "letterSpacing": "-0.01em" },
+      "titleSm": { "fontSize": "14px", "lineHeight": "20px", "fontWeight": "600", "letterSpacing": "0" },
+      "bodyLg": { "fontSize": "16px", "lineHeight": "24px", "fontWeight": "400" },
+      "bodyMd": { "fontSize": "14px", "lineHeight": "22px", "fontWeight": "400" },
+      "bodySm": { "fontSize": "12px", "lineHeight": "18px", "fontWeight": "400" },
+      "labelLg": { "fontSize": "14px", "lineHeight": "18px", "fontWeight": "600", "letterSpacing": "0.02em" },
+      "labelMd": { "fontSize": "12px", "lineHeight": "16px", "fontWeight": "600", "letterSpacing": "0.04em" },
+      "labelSm": { "fontSize": "10px", "lineHeight": "14px", "fontWeight": "700", "letterSpacing": "0.06em" }
+    }
+  },
+  "borderRadius": {
+    "none": "0",
+    "sm": "0.25rem",
+    "default": "0.5rem",
+    "md": "0.5rem",
+    "lg": "0.75rem",
+    "xl": "1rem",
+    "2xl": "1.25rem",
+    "full": "9999px"
+  },
+  "spacing": {
+    "xs": "0.25rem",
+    "sm": "0.5rem",
+    "md": "1rem",
+    "lg": "1.5rem",
+    "xl": "2.5rem",
+    "gutter": "1.5rem",
+    "margin": "2rem"
+  },
+  "screens": [
+    {
+      "id": "76fe739b03a04a2a9c2eb530fa2db45e",
+      "title": "Bảng tin Dành cho bạn",
+      "type": "for_you_feed",
+      "file": "stitch-designs/screens/for_you_feed.html",
+      "image": "stitch-designs/screens/for_you_feed.png"
+    },
+    {
+      "id": "99b6fcff0d4d4096bdf3344687cab9ef",
+      "title": "Chi tiết video & Bình luận",
+      "type": "video_detail",
+      "file": "stitch-designs/screens/video_detail.html",
+      "image": "stitch-designs/screens/video_detail.png"
+    },
+    {
+      "id": "35d09dc0553649059e99014fa7d63e14",
+      "title": "Hồ sơ tác giả",
+      "type": "creator_profile",
+      "file": "stitch-designs/screens/creator_profile.html",
+      "image": "stitch-designs/screens/creator_profile.png"
+    },
+    {
+      "id": "3164d01a2320433fa141f7b7749e304f",
+      "title": "Studio Tải lên video",
+      "type": "upload_studio",
+      "file": "stitch-designs/screens/upload_studio.html",
+      "image": "stitch-designs/screens/upload_studio.png"
+    }
+  ]
+}

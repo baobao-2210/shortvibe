@@ -1,0 +1,69 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  darkMode: 'class',
+  content: [
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}',
+  ],
+  theme: {
+    extend: {
+      colors: {
+        primary: '#fe2c55',
+        'primary-container': '#ff5168',
+        'primary-fixed': '#ffdada',
+        'primary-fixed-dim': '#ffb3b6',
+        'on-primary': '#ffffff',
+        'on-primary-container': '#5b0015',
+        'on-primary-fixed': '#40000c',
+        'on-primary-fixed-variant': '#920027',
+
+        secondary: '#00f2fe',
+        'secondary-container': '#00f1fd',
+        'secondary-fixed': '#6ff6ff',
+        'secondary-fixed-dim': '#00dce6',
+        'on-secondary': '#00373a',
+        'on-secondary-container': '#006a6f',
+        'on-secondary-fixed': '#002022',
+        'on-secondary-fixed-variant': '#004f53',
+
+        tertiary: '#deb7ff',
+        'tertiary-container': '#b76dfd',
+        'tertiary-fixed': '#f0dbff',
+        'tertiary-fixed-dim': '#deb7ff',
+        'on-tertiary': '#4a007f',
+        'on-tertiary-container': '#400070',
+
+        background: '#131316',
+        'on-background': '#e4e1e6',
+        surface: '#131316',
+        'surface-dim': '#131316',
+        'surface-bright': '#39393c',
+        'surface-container-lowest': '#0e0e11',
+        'surface-container-low': '#1b1b1e',
+        'surface-container': '#1f1f22',
+        'surface-container-high': '#2a2a2d',
+        'surface-container-highest': '#353438',
+        'on-surface': '#e4e1e6',
+        'on-surface-variant': '#e6bcbd',
+        outline: '#ad8889',
+        'outline-variant': '#5d3f40',
+
+        error: '#ffb4ab',
+        'error-container': '#93000a',
+        'on-error': '#690005',
+        'on-error-container': '#ffdad6',
+      },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        headline: ['Inter', 'sans-serif'],
+        label: ['Space Grotesk', 'sans-serif'],
+      },
+      borderRadius: {
+        DEFAULT: '0.5rem',
+        '2xl': '1.25rem',
+        '3xl': '1.5rem',
+      },
+    },
+  },
+  plugins: [],
+};
