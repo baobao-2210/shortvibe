@@ -8,6 +8,7 @@ import { existsSync, mkdirSync } from 'fs';
 async function bootstrap() {
   const logger = new Logger('Bootstrap');
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  app.set('trust proxy', 1);
 
   // Ensure uploads directory exists and serve static files
   const uploadsDir = join(process.cwd(), 'uploads');
